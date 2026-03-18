@@ -1,6 +1,13 @@
 # Changelog
 
-## v2.0.4
+## v2.3.0
+- Feat: Standardized "Free Play" mode identifier to `free-play` across the codebase.
+- Feat: Improved i18n integrity by syncing missing keys across all supported languages.
+- UI: Replaced native `<img>` with Next.js `<Image />` in the header for optimized performance.
+- Config: Added remote patterns for Google and Dicebear images in `next.config.mjs`.
+- Docs: Updated README and openspec documentation to reflect latest features and architecture.
+
+## v2.2.1
 - Fix: Fixed `ChunkLoadError` by adding a global error handler that unregisters the service worker and reloads the page.
 - Fix: Fixed a side effect in the render function of `global-error.tsx`.
 

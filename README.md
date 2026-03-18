@@ -1,4 +1,4 @@
-# NoteCascade 🎹 v2.0.4
+# NoteCascade 🎹 v2.3.0
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
