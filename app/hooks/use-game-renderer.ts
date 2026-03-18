@@ -3,7 +3,7 @@
 
 import { useEffect, useRef } from 'react';
 import { Song } from '../lib/songs';
-import { Feedback, HIT_LINE_Y, GOOD_THRESHOLD, PERFECT_THRESHOLD } from './use-game-engine';
+import { Feedback, HIT_LINE_Y } from './use-game-engine';
 import { PlayMode } from '../lib/store';
 
 const FALL_SPEED = 200;
@@ -198,61 +198,6 @@ export function useGameRenderer(
             ctx.fillRect(geo.x + 4, noteTopY + 2, geo.width - 8, Math.min(noteHeight - 4, 3));
           }
         });
-      }
-
-      // Draw timing bar (only for non-free play mode)
-      if (playMode !== 'free-play') {
-        const barWidth = Math.min(400, width * 0.6);
-        const barHeight = 12;
-        const barX = (width - barWidth) / 2;
-        const barY = 40;
-
-        ctx.fillStyle = theme === 'light' ? 'rgba(241, 245, 249, 0.9)' : 'rgba(15, 23, 42, 0.8)';
-        ctx.beginPath();
-        ctx.roundRect(barX, barY, barWidth, barHeight, 6);
-        ctx.fill();
-        
-        ctx.strokeStyle = theme === 'light' ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.15)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-
-        ctx.fillStyle = theme === 'light' ? 'rgba(0, 0, 0, 0.4)' : 'rgba(255, 255, 255, 0.4)';
-        ctx.fillRect(barX + barWidth / 2 - 1.5, barY - 6, 3, barHeight + 12);
-
-        const perfectZoneWidth = barWidth * (PERFECT_THRESHOLD / GOOD_THRESHOLD);
-        ctx.fillStyle = 'rgba(52, 211, 153, 0.15)';
-        ctx.fillRect(barX + barWidth / 2 - perfectZoneWidth / 2, barY + 1, perfectZoneWidth, barHeight - 2);
-
-        recentHits.current = recentHits.current.filter(h => now - h.timestamp < 1500);
-        recentHits.current.forEach(hit => {
-          const age = now - hit.timestamp;
-          const opacity = 1 - age / 1500;
-          const normalizedDiff = Math.max(-1, Math.min(1, hit.timeDiff / GOOD_THRESHOLD));
-          const hitX = barX + barWidth / 2 + (normalizedDiff * barWidth / 2);
-          
-          ctx.fillStyle = hit.type === 'perfect' 
-            ? `rgba(52, 211, 153, ${opacity})` 
-            : hit.type === 'early' 
-              ? `rgba(96, 165, 250, ${opacity})` 
-              : hit.type === 'late'
-                ? `rgba(251, 191, 36, ${opacity})`
-                : hit.type === 'good'
-                  ? `rgba(96, 165, 250, ${opacity})`
-                  : `rgba(148, 163, 184, ${opacity})`;
-
-          ctx.beginPath();
-          ctx.roundRect(hitX - 3, barY - 2, 6, barHeight + 4, 3);
-          ctx.fill();
-        });
-
-        ctx.fillStyle = theme === 'light' ? 'rgba(100, 116, 139, 0.9)' : 'rgba(148, 163, 184, 0.9)';
-        ctx.font = 'bold 11px Inter';
-        ctx.textAlign = 'center';
-        ctx.fillText(t.early.toUpperCase(), barX, barY + 28);
-        ctx.fillText(t.late.toUpperCase(), barX + barWidth, barY + 28);
-        
-        ctx.fillStyle = 'rgba(52, 211, 153, 0.9)';
-        ctx.fillText(t.perfect.toUpperCase(), barX + barWidth / 2, barY + 28);
       }
 
       // Draw falling notes (only for non-free play mode)

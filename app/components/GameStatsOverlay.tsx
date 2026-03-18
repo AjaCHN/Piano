@@ -2,7 +2,7 @@
 'use client';
 
 import React from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { Play, Pause, RefreshCw, SkipForward } from 'lucide-react';
 import { Song } from '../lib/songs';
 
@@ -28,10 +28,7 @@ interface GameStatsOverlayProps {
   };
 }
 
-export function GameStatsOverlay({ song, score, t, recentHits = [], controls }: GameStatsOverlayProps) {
-  const lastHit = recentHits.length > 0 ? recentHits[recentHits.length - 1] : null;
-  const timingOffset = lastHit ? (lastHit.timeDiff / 0.25) * 50 : 0; // Normalize to -50 to 50 range
-
+export function GameStatsOverlay({ song, score, t, controls }: GameStatsOverlayProps) {
   return (
     <div id="game-stats-overlay" className="pointer-events-none absolute inset-0 flex flex-col p-4 md:p-8">
       <div className="flex w-full relative">
@@ -86,53 +83,28 @@ export function GameStatsOverlay({ song, score, t, recentHits = [], controls }: 
           )}
         </div>
 
-        {/* Right side: Score, Stats, Timing */}
-        <div className="absolute bottom-24 right-4 flex flex-col items-end pointer-events-auto gap-4">
-          <div className="flex flex-col items-end">
+        {/* Right side: Score, Stats */}
+        <div className="absolute bottom-36 md:bottom-40 right-4 flex flex-col items-end pointer-events-auto gap-4 max-w-[60%]">
+          <div className="flex flex-col items-end w-full">
             <div className="text-[10px] uppercase tracking-[0.3em] theme-text-secondary font-black mb-1">{t.currentScore}</div>
-            <div className="text-4xl md:text-7xl font-black theme-text-primary tabular-nums tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+            <div className="text-4xl md:text-7xl font-black theme-text-primary tabular-nums tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] break-all text-right leading-none">
               {score.currentScore.toLocaleString()}
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="flex flex-col gap-2 mt-2">
+          {/* Stats - Horizontal Layout */}
+          <div className="flex flex-wrap justify-end gap-2 mt-2">
             {[
               { key: 'perfect', label: t.perfect, value: score.perfect, color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
               { key: 'good', label: t.good, value: score.good, color: 'text-blue-400', bg: 'bg-blue-400/10' },
               { key: 'miss', label: t.miss, value: score.miss, color: 'text-amber-400', bg: 'bg-amber-400/10' },
               { key: 'wrong', label: t.wrong, value: score.wrong, color: 'text-rose-400', bg: 'bg-rose-400/10' },
             ].map((stat) => (
-              <div key={stat.key} className={`flex items-center justify-between gap-4 px-3 py-1 rounded-lg border theme-border ${stat.bg} backdrop-blur-md w-32`}>
-                <span className={`text-[9px] uppercase font-black ${stat.color}`}>{stat.label}</span>
-                <span className="text-sm font-black theme-text-primary tabular-nums">{stat.value}</span>
+              <div key={stat.key} className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border theme-border ${stat.bg} backdrop-blur-md min-w-[80px]`}>
+                <span className={`text-[8px] md:text-[9px] uppercase font-black ${stat.color}`}>{stat.label}</span>
+                <span className="text-xs md:text-sm font-black theme-text-primary tabular-nums">{stat.value}</span>
               </div>
             ))}
-          </div>
-
-          {/* Timing Indicator Bar */}
-          <div className="flex flex-col gap-1.5 w-48">
-            <div className="flex justify-between text-[9px] uppercase tracking-widest font-bold opacity-50">
-              <span>{t.early}</span>
-              <span>{t.perfect}</span>
-              <span>{t.late}</span>
-            </div>
-            <div className="h-2 w-full bg-black/20 rounded-full relative border theme-border overflow-hidden">
-              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-white/20 -translate-x-1/2" />
-              <AnimatePresence mode="wait">
-                {lastHit && (
-                  <motion.div
-                    key={lastHit.timestamp}
-                    initial={{ x: `${50 + timingOffset}%`, opacity: 0, scaleY: 0 }}
-                    animate={{ opacity: 1, scaleY: 1 }}
-                    exit={{ opacity: 0 }}
-                    className={`absolute top-0 bottom-0 w-1 -translate-x-1/2 ${
-                      lastHit.type === 'perfect' ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]' : 'bg-blue-400'
-                    }`}
-                  />
-                )}
-              </AnimatePresence>
-            </div>
           </div>
         </div>
       </div>

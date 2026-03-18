@@ -147,7 +147,6 @@ export function GameCanvas({
           song={song} 
           score={score} 
           t={t} 
-          recentHits={recentHits.current}
           controls={controls}
         />
       )}
