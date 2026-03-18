@@ -223,19 +223,7 @@ export function AppHeader({
               <div className="h-px bg-white/10 my-1" />
               <button onClick={() => openSettings('general')} className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-white/10 theme-text-secondary hover:theme-text-primary text-xs font-bold uppercase tracking-widest text-left">
                 <Settings className="h-4 w-4" />
-                {t.general}
-              </button>
-              <button onClick={() => openSettings('audio')} className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-white/10 theme-text-secondary hover:theme-text-primary text-xs font-bold uppercase tracking-widest text-left">
-                <Music className="h-4 w-4" />
-                {t.audio}
-              </button>
-              <button onClick={() => openSettings('keyboard')} className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-white/10 theme-text-secondary hover:theme-text-primary text-xs font-bold uppercase tracking-widest text-left">
-                <KeyboardIcon className="h-4 w-4" />
-                {t.keyboard}
-              </button>
-              <button onClick={() => openSettings('midi')} className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-white/10 theme-text-secondary hover:theme-text-primary text-xs font-bold uppercase tracking-widest text-left">
-                <RefreshCw className="h-4 w-4" />
-                {t.midi}
+                {t.settings}
               </button>
               <button onClick={() => openSettings('about')} className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-white/10 theme-text-secondary hover:theme-text-primary text-xs font-bold uppercase tracking-widest text-left">
                 <HelpCircle className="h-4 w-4" />
