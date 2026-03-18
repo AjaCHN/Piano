@@ -1,0 +1,162 @@
+# Changelog
+
+## v2.0.4
+- Fix: Fixed `ChunkLoadError` by adding a global error handler that unregisters the service worker and reloads the page.
+- Fix: Fixed a side effect in the render function of `global-error.tsx`.
+
+## v2.0.3
+- Fix: Replaced `next-pwa` with `@ducanh2912/next-pwa` to fix build errors and `ChunkLoadError` related to `global-error.js`.
+- Fix: Fixed missing dependency warning in `use-game-logic.ts`.
+
+## v2.0.2
+- Fix: Fixed hydration error by suppressing warnings in layout and ensuring components render only after mount.
+- Fix: Fixed build error by regenerating missing build artifacts.
+- Refactor: Optimized state persistence by switching from Cookie to localStorage.
+- UI: Improved menu auto-close interaction in AppHeader.
+
+## v2.0.1
+- Feat: Added 15 new children's songs to the library (Little Rabbit Be Good, Counting Ducks, Malan Flower, Childhood, Edelweiss, The Dull-Ice Flower, Catching Loaches, Little Donkey, Little Swallow, Pulling Radishes, Two Tigers, Doraemon, The Painter, Little Conch, Peppa Pig).
+- UI: Moved random tips display position up to the blank canvas area and ensured it doesn't block other UI elements.
+- L10n: Added translations for the new songs in English and Simplified Chinese.
+
+## [2.0.0]
+- Refactor: Major refactoring of core hooks (`use-game-logic.ts`, `use-midi.ts`) and components (`Keyboard.tsx`) to improve modularity and reduce token consumption.
+- Refactor: Extracted instrument creation into a separate `instruments.ts` module.
+- Refactor: Extracted MIDI types and utils into a dedicated directory.
+- Refactor: Extracted `Key` component from `Keyboard.tsx`.
+- Refactor: Extracted `GameControls` and `BackgroundEffects` from `page.tsx`.
+- L10n: Completed translations for all 11 supported languages, including new settings keys (metronome, sensitivity, latency, etc.).
+- UI: Updated `AudioSettings` to use localized strings.
+
+## [1.7.3]
+- Bugfix: Fixed a bug where Free Play mode would incorrectly trigger auto-play when notes were played.
+
+## [1.7.2]
+- UI: Removed duplicate settings button from the top toolbar.
+- UI: Added Demo Mode to the mode switcher.
+- UI: Moved Achievements list to the collapsed menu.
+
+## [1.7.1]
+- Audio: Optimized polyphony management and voice limiting to prevent audio dropouts during complex passages.
+- Audio: Fine-tuned compressor and limiter settings to eliminate clipping when multiple keys are pressed simultaneously.
+- Audio: Lowered default master volume to provide more headroom for polyphonic playback.
+
+## [1.7.0]
+- Audio: Added Master Limiter and Compressor to prevent distortion during complex MIDI playback.
+- MIDI: Added support for Pitch Bend, Modulation (vibrato), and Volume/Expression from external MIDI hardware.
+- UI: Added Full Screen toggle button in the header.
+- UI: Added a Mode Switcher in the header (Follow, Demo, Free Play, Perform).
+- UI: Result card now auto-dismisses after 10 seconds with a visual countdown.
+- Bugfix: Fixed keyboard range selection bug and ensured a minimum width of 25 keys.
+- Bugfix: Allowed manual keyboard range override even when MIDI is connected.
+
+## [1.6.2]
+- UI: Swapped positions of song difficulty stars and song style tags for a more logical information hierarchy.
+
+## [1.6.1]
+- UI: Moved song difficulty stars to the same line as the song style tag, freeing up more horizontal space for song titles in the library list.
+
+## [1.6.0]
+- UI: Enhanced MIDI device status indicator in the header with more prominent colors, borders, and a pulsing glow when connected.
+- UI: Optimized song library layout with single-line song names and horizontal scrolling for long titles.
+- Performance: Significantly optimized the game renderer by reducing expensive canvas operations like `shadowBlur` and `createLinearGradient` inside the main loop.
+- Performance: Switched to solid colors with alpha for notes and active columns to reduce hardware resource consumption.
+- Performance: Enabled `alpha: false` on the 2D context for faster background rendering.
+
+## [1.5.1]
+- Fix: Disabled automatic keyboard range adjustment when an external MIDI device is connected. The keyboard now stays at a fixed 88-key range (21-108) to ensure stability for hardware users.
+
+## [1.5.0]
+- UI: Optimized song library list by removing redundant "Play" links/buttons from song cards for a cleaner look.
+- Visual: Enhanced the hit line (baseline) in the game renderer with a stronger glow and more prominent styling.
+- Visual: Added dynamic contact effects (horizontal flash and vertical glow) when notes hit the baseline, improving visual feedback for timing.
+
+## [1.4.12]
+- Fix: Fixed `ReferenceError: isConnecting is not defined` in `page.tsx`.
+
+## [1.4.11]
+- Feature: Enhanced MIDI refresh functionality. The "Connect" button now explicitly re-requests MIDI access from the browser, which is more effective at triggering the permission prompt if it was previously dismissed.
+- UI: Added an `isConnecting` loading state with visual feedback (animations) when MIDI is being initialized.
+- UI: The MIDI device indicator in the header is now visible on mobile devices to allow manual connection.
+
+## [1.4.10]
+- Feature: Made the "NO DEVICE" indicator in the top header clickable. Clicking it now manually triggers the MIDI connection process, which correctly prompts the browser's MIDI permission dialog (required by recent Chrome security policies).
+
+## [1.4.9]
+- Fix: Fixed a bug where the result modal showed all 0s for the score data because the game engine was resetting the score immediately upon the song ending.
+
+## [1.4.8]
+- Audio: Enhanced instrument sounds for a thicker, warmer tone. Added a master EQ (boosting lows and highs), a master Reverb, and a Chorus effect for the EPiano. Upgraded Synth and Strings to use fat oscillators.
+
+## [1.4.7]
+- Chore: Fixed various linting warnings (unused imports, missing dependencies in `useEffect`).
+
+## [1.4.6]
+- Fix: Added missing import for `PERFECT_THRESHOLD` in `use-game-renderer.ts`.
+
+## [1.4.5]
+- UI: Moved the timing bar (Early/Perfect/Late indicator) to the top center of the screen and enhanced its visual styling, including a highlighted perfect zone and ripple effects for hits.
+- UI: Adjusted the GameStatsOverlay layout to prevent overlapping with the new timing bar position.
+
+## [1.4.4]
+- Fix: Fixed a bug where the final score shown in the result modal was occasionally stale by using a ref to track the latest score state.
+- UI: Added icons to the buttons in the Result Modal.
+
+## [1.4.3]
+- Fix: Extremely robust MIDI device enumeration using iterators instead of `forEach`.
+- Fix: Prioritize `sysex: false` for MIDI access to avoid permission blocks in strict environments.
+- Fix: Re-attach MIDI listeners to all inputs on any state change (hot-plugging).
+
+## [1.4.2]
+- Refactor: Split `app/lib/song-data.ts` into smaller, categorized files (`classic.ts`, `holiday.ts`, `chinese.ts`, `pop-rock.ts`, `utils.ts`) for better maintainability.
+
+## [1.4.1]
+- Feat: Expanded melodies for multiple built-in songs to make them longer and more complete (Ode to Joy, Spring, Canon in D, Fur Elise, Swan Lake, Blue Danube, Entertainer, William Tell, Mo Li Hua, Butterfly Lovers, Beyond songs, Bugs Fly).
+
+## [1.4.0]
+- Design: New SVG logo and favicon.
+- Branding: Updated app header with the new logo.
+
+## [1.3.9]
+- Fix: Improved MIDI connection robustness (added sysex retry and listener cleanup).
+- Feat: Dynamic keyboard range adjustment (fits song notes when no MIDI is connected).
+- Feat: Auto-expand keyboard range when MIDI is connected.
+
+## [1.3.8]
+- Feat: Sort songs by difficulty (ascending).
+
+## [1.3.7]
+- Fix: Syntax error in SongSelector component.
+
+## [1.3.6]
+- Fix: Make song selector header sticky to prevent it from disappearing on scroll.
+
+## v1.3.5
+- Added "Bugs Fly" song to the library.
+- Refactored `app/page.tsx` into custom hooks (`useGameLogic`, `useSidebarResize`) for better maintainability.
+- Fixed an issue with sound playback in demo mode.
+- Optimized sidebar resizing and UI layout.
+
+## v1.1.2
+- Added automatic metronome with adjustable BPM and beats per measure.
+- Moved playback controls to the bottom of the song list sidebar.
+- Added a toggle to show/hide PC keyboard mapping on the virtual piano keys.
+- Extracted and documented architecture, components, state, and audio specifications into the `openspec` directory.
+
+## v1.1.1
+- Refactored project structure by moving hooks and lib directories to root, and components to app/components.
+- Updated all import paths to reflect the new directory structure.
+- Recreated missing Keyboard.tsx component.
+
+## v1.1.0
+- Added theme system (Dark, Light, Cyber, Classic)
+- Enhanced settings modal with dynamic keyboard range selection
+- Added note name toggle for falling notes and keyboard
+- Improved UI with icons and responsive sidebar
+- Updated translations for zh-CN and zh-TW
+- Added app information and MIDI status in settings
+
+## v1.0.5
+- Initial release with MIDI support and basic gameplay
+- Song library and achievement system
+- Multi-language support

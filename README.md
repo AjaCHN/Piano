@@ -1,11 +1,94 @@
-<div align="center">
+# NoteCascade 🎹 v2.0.4
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38bdf8)](https://tailwindcss.com/)
 
-  <h1>Built with AI Studio</h2>
+[中文文档](./README_zh-CN.md) | **English Documentation**
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+**NoteCascade** is a modern, web-based MIDI piano practice application designed to help you master your keys through an engaging, waterfall-style rhythm game interface. Connect your MIDI keyboard and start playing!
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+![NoteCascade Screenshot](https://via.placeholder.com/800x450?text=NoteCascade+Preview) *(Placeholder for screenshot)*
 
-</div>
+## ✨ Features
+
+-   **🎹 MIDI Support**: Connect any MIDI-compatible keyboard via USB or Bluetooth for real-time feedback.
+-   **🌊 Waterfall Gameplay**: Visual falling notes interface similar to popular rhythm games.
+-   **🌍 Multi-language Support**: Fully localized in English, Chinese (Simplified/Traditional), Spanish, Arabic, French, Portuguese, German, Japanese, Korean, and Russian.
+-   **🏆 Achievement System**: Track your progress with unlockable achievements and stats.
+-   **🎨 Theming**: Choose from multiple themes (Dark, Light, Cyber, Classic) to suit your style.
+-   **📱 Responsive Design**: Works on desktop and mobile devices (touch support included).
+-   **🎵 Built-in Songs**: Practice with a library of built-in songs across various styles (Classic, Chinese, Children, etc.).
+-   **⚙️ Robust UX**: Auto-closing menus, robust error handling, and seamless state management.
+-   **🛠️ MIDI Mapping**: Custom mapping for physical MIDI keys to virtual keys.
+-   **⏲️ Metronome**: Built-in metronome to help you keep a steady beat.
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+-   Node.js 18.17 or later
+-   npm or yarn or pnpm
+
+### Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/AjaCHN/NoteCascade.git
+    cd NoteCascade
+    ```
+
+2.  Install dependencies:
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    ```
+
+3.  Run the development server:
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    ```
+
+4.  Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🛠️ Tech Stack
+
+-   **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+-   **Language**: [TypeScript](https://www.typescriptlang.org/)
+-   **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+-   **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+-   **Audio/MIDI**: [Tone.js](https://tonejs.github.io/) & Web MIDI API
+-   **Animations**: [Motion](https://motion.dev/)
+-   **Icons**: [Lucide React](https://lucide.dev/)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1.  Fork the project
+2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your changes (`git commit -m 'feat: Add some AmazingFeature'`)
+4.  Push to the branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👤 Author
+
+**Sut**
+
+-   GitHub: [@sutchan](https://github.com/sutchan)
+
+---
+
+*Enjoy playing! 🎵*
