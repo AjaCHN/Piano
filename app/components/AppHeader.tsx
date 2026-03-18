@@ -1,7 +1,7 @@
-// app/components/AppHeader.tsx v2.0.4
+// app/components/AppHeader.tsx v2.0.6
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { 
   Settings, RefreshCw, Maximize2, Minimize2, 
@@ -13,7 +13,7 @@ import {
 } from '../lib/store';
 import { useAuth } from '../lib/auth-context';
 
-const version = "2.0.4";
+const version = "2.0.6";
 
 interface AppHeaderProps {
   theme: string;
