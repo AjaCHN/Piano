@@ -14,11 +14,8 @@ const nextConfig = {
   reactStrictMode: true,
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
-  devIndicators: {
-    appIsrStatus: false,
-    buildActivity: false,
-  },
-  webpack: (config, { dev }) => {
+  devIndicators: false,
+  webpack: (config, { dev, isServer }) => {
     if (dev) {
       config.cache = false;
     }
