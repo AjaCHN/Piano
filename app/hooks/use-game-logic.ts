@@ -1,4 +1,4 @@
-// app/hooks/use-game-logic.ts v2.0.3
+// app/hooks/use-game-logic.ts v2.2.1
 import { useState, useEffect, useCallback, useRef } from 'react';
 import * as Tone from 'tone';
 import confetti from 'canvas-confetti';
@@ -52,7 +52,7 @@ export function useGameLogic(
   }, [metronomeEnabled, metronomeBpm, metronomeBeats, isPlaying]);
 
   const handleSongEnd = useCallback(() => {
-    if (playMode === 'demo' || playMode === 'free') {
+    if (playMode === 'demo' || playMode === 'free-play') {
       setIsPlaying(false);
       setCurrentTime(0);
       currentTimeRef.current = 0;
@@ -109,7 +109,7 @@ export function useGameLogic(
 
   const prevActiveNotesSize = useRef(0);
   useEffect(() => {
-    if (playMode !== 'free' && activeNotes.size > 0 && prevActiveNotesSize.current === 0 && !isPlaying) {
+    if (playMode !== 'free-play' && activeNotes.size > 0 && prevActiveNotesSize.current === 0 && !isPlaying) {
       setTimeout(() => togglePlay(), 0);
     }
     prevActiveNotesSize.current = activeNotes.size;

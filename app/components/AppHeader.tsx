@@ -1,4 +1,4 @@
-// app/components/AppHeader.tsx v2.0.6
+// app/components/AppHeader.tsx v2.2.1
 'use client';
 
 import React, { useEffect, useState, useCallback, useRef } from 'react';
@@ -13,7 +13,7 @@ import {
 } from '../lib/store';
 import { useAuth } from '../lib/auth-context';
 
-const version = "2.0.6";
+const version = "2.2.1";
 
 interface AppHeaderProps {
   theme: string;
@@ -99,7 +99,7 @@ export function AppHeader({
   const modes = [
     { id: 'demo', icon: Play, label: t.demo || 'Demo' },
     { id: 'practice', icon: KeyboardIcon, label: t.practice || 'Practice' },
-    { id: 'free', icon: Music, label: t.freePlay || 'Free' },
+    { id: 'free-play', icon: Music, label: t.freePlay || 'Free' },
   ];
 
   return (
@@ -200,7 +200,7 @@ export function AppHeader({
             title="Menu (Esc)"
           >
             {user?.photoURL ? (
-              <img src={user.photoURL} alt="User" className="h-5 w-5 rounded-full object-cover" />
+              <Image src={user.photoURL} alt="User" width={20} height={20} className="rounded-full object-cover" />
             ) : (
               <Menu className="h-5 w-5" />
             )}
